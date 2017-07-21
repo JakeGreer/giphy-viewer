@@ -1,0 +1,38 @@
+body {
+	background: #7f0000;
+}
+
+.gif {
+	overflow: auto;
+}
+
+.container {
+	clear: both;
+}
+
+.giphy {
+	margin-top: 20px;
+	font-size: 20px;
+	padding: 5px; 
+	background-color: #fff;
+	color: #7f0000;
+	font-weight: bold;
+}
+
+#add-gif {
+	margin-top: 20px;
+	font-size: 12px;
+	padding: 5px; 
+	background-color: #fff;
+	color: #7f0000;
+	font-weight: bold;
+}
+
+#gif-input {
+	width: 200px;
+	height: 20px;
+	font-size: 20px;
+
+}
+
+
