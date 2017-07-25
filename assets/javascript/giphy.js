@@ -1,103 +1,116 @@
-// Initial array of food
-var foods = ["Funny", "Food", "Movies", "Sad", "Animals"];
-
-
+// Initial array of gifs
+var gifs = ["Funny", "Food", "Movies", "Sad", "Animals"];
 // Function for dumping the JSON content for each button into the div
+var maxIndex = 10;
 function displayGifs() {
-$(".gif").empty();
- var food = $(this).attr("data-name");
- var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + food + "&api_key=dc6zaTOxFJmzC";
-// YOUR CODE GOES HERE!!! HINT: You will need to create a new div to hold the JSON.
- $.ajax({
-  url: queryURL,
-  method: "GET"
-}).done(function(response) {
-  console.log(response);
+
+	$("#images").empty();
+	 var gif = $(this).attr("data-name");
+	 var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + gif + "&api_key=dc6zaTOxFJmzC";
+
+	 $.ajax({
+	  url: queryURL,
+	  method: "GET"
+	}).done(function(response) {
+	  console.log(response);
+
+	  maxIndex = $(".dropdown").val();
 
 
-for(i = 0; i < 10; i++) {
+		for(i = 0; i < maxIndex; i++) {
 
-	var div = $("<div>");
-	var rating = $("<h2>Rating: " + response.data[i].rating + "</h2>");
-
-	var gif = $("<img>");
-	gif.attr("src", response.data[i].images.fixed_height.url);
-	console.log(gif);
-	$(gif).css({
-		'height' : '300px',
-/*		'float' : 'left',*/
-		'margin' : '30px'
-	});
-
-	$(gif).on("click", function() {
-		var click = true;
-
-		if(click == false) {
+			var rating = $("<p>");
+			rating.text("Rating: " + response.data[i].rating.toUpperCase());
+			var gifHolder = $("<div>");
+			var gif = $("<img>");
+			gif.addClass("gif");
+			gif.attr("data-animate", response.data[i].images.fixed_height.url);
+			gif.attr("data-still", response.data[i].images.fixed_height_still.url);
+			gif.attr("data-state", "animate");
 			gif.attr("src", response.data[i].images.fixed_height.url);
-			click = true;
+			gifHolder.addClass("col-md-3 gifHolder center-block text-center");
+
+
+			console.log(gif);
+
+			$(gifHolder).append(rating);
+			$(gifHolder).append(gif);
+			$("#images").prepend(gifHolder);
+		 
 		}
-		else {
-			gif.attr("src", response.data[i].images.fixed_height_still.url);
-			click = true;
-		}
+		//add an on click function to each gif that pauses and plays.
+		$(".gif").on("click", function() {
 
-	})
+	      var state = $(this).attr("data-state");
+
+	      console.log(state);
+
+	      if(state === "still") {
+	        var animate = $(this).attr("data-animate");
+	        $(this).attr("src", animate);
+	        $(this).attr("data-state", "animate");
+	      }
+	      else {
+	        var still = $(this).attr("data-still");
+	        $(this).attr("src", still);
+	        $(this).attr("data-state", "still");
+	      }
+
+		});//end of onclick function
+	});//end of ajax all
+
+}//end of display gifs function.
 
 
-	rating.appendTo(div);
-	gif.appendTo(div);
-
-	div.appendTo(".gif");
-
-}
-
-
-
-}); 
-}
-
-// Function for displaying movie data
+// Function for displaying gif data
 function renderButtons() {
 
-// Deleting the buttons prior to adding new movies
-// (this is necessary otherwise you will have repeat buttons)
-$("#buttons-view").empty();
-
-// Looping through the array of movies
-for (var i = 0; i < foods.length; i++) {
-
-  // Then dynamicaly generating buttons for each movie in the array
-  // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
-  var a = $("<button>");
-  // Adding a class of movie to our button
-  a.addClass("giphy");
-  // Adding a data-attribute
-  a.attr("data-name", foods[i]);
-  // Providing the initial button text
-  a.text(foods[i]);
-  // Adding the button to the buttons-view div
-  $("#buttons-view").append(a);
-}
+	// Looping through the array of movies
+	for (var i = 0; i < gifs.length; i++) {
+	  // Then dynamicaly generating buttons for each gif in the array
+	  // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+	  var btn = $("<button>");
+	  // Adding a class of gif to our button
+	  btn.addClass("buttons col-md-2");
+	  // Adding a data-attribute
+	  btn.attr("data-name", gifs[i]);
+	  // Providing the initial button text
+	  btn.text(gifs[i]);
+	  // Adding the button to the buttons-view div
+	  $("#buttons-view").prepend(btn);
+	}
 }
 
 // This function handles events where one button is clicked
 $("#add-gif").on("click", function(event) {
 
-event.preventDefault();
+	event.preventDefault();
+	// Deleting the buttons prior to adding new gifs
+	// (this is necessary otherwise you will have repeat buttons)
+	$("#buttons-view").empty();
+	// This line grabs the input from the textbox
+	var newGif = $("#gif-input").val();
 
-// This line grabs the input from the textbox
-var food = $("#gif-input").val().trim();
+	// The gif from the textbox is then added to our array
+	gifs.push(newGif);
 
-// The movie from the textbox is then added to our array
-foods.push(food);
-
-// Calling renderButtons which handles the processing of our movie array
-renderButtons();
+	// Calling renderButtons which handles the processing of our gif array
+	//adds newly input gifs
+	renderButtons();
 
 });
 
-// Generic function for displaying the movieInfo
-$(document).on("click", ".giphy", displayGifs);
+// Generic function for displaying the gifInfo
+$(document).on("click", ".buttons", displayGifs);
+
 
 // Calling the renderButtons function to display the intial buttons
 renderButtons();
+
+
+
+
+
+
+
+

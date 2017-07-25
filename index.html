@@ -3,7 +3,7 @@
 <head>
 	<title>Giphy-Viewer</title>
     <!-- Latest compiled and minified css -->
-<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
@@ -11,17 +11,30 @@
 <body>
 	<div class="container">
 
+    <div class="row">
+
         <form id="gif-form">
+          <div class="col-md-4">
             <label for="gif-input"></label>
             <input type="text" id="gif-input">
             <!-- Button triggers new movie to be added -->
             <input id="add-gif" type="submit" value="Add a Gif">
+          </div>
+
+          <div class="form-group col-md-2">
+            <label><br>Number of Gifs</label>
+            <select class="form-control dropdown">
+              <option>10</option>
+              <option>15</option>
+              <option>25</option>
+            </select>
+          </div>
         </form>
+    </div>
 
-         <!-- Buttons will Get Dumped Dere -->
-        <div id="buttons-view"></div>  
+    <div class="row" id="buttons-view"></div>  
 
-        <div class="gif" id="images"></div>
+    <div class="row" id="images"></div>
 
   </div>
 

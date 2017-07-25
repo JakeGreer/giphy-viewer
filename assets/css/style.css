@@ -2,26 +2,39 @@ body {
 	background: #7f0000;
 }
 
-.gif {
-	overflow: auto;
+p {
+	font-size: 20px;
+	color: #fff;
 }
 
-.container {
-	clear: both;
+label {
+	color: #fff;
+	font-size: 20px;
 }
 
-.giphy {
-	margin-top: 20px;
+.dropdown {
+	font-size: 20px;
+	color: #7f0000;
+	font-weight: bold;
+}
+
+.buttons {
+	margin: 20px 5px 0 5px;
 	font-size: 20px;
 	padding: 5px; 
 	background-color: #fff;
 	color: #7f0000;
 	font-weight: bold;
+
+}
+
+.gifHolder {
+	margin: 20px;
 }
 
 #add-gif {
-	margin-top: 20px;
-	font-size: 12px;
+	margin: 55px 5px 0 5px;
+	font-size: 20px;
 	padding: 5px; 
 	background-color: #fff;
 	color: #7f0000;
@@ -29,9 +42,10 @@ body {
 }
 
 #gif-input {
-	width: 200px;
-	height: 20px;
+	width: 195px;
+	height: 40px;
 	font-size: 20px;
+
 
 }
 
